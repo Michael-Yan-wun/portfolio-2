@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>關於我 | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/performance.css">
+  </head>
+  <body class="min-h-screen bg-slate-900 text-white antialiased">
+    <header>
+      <nav
+        class="fixed top-0 z-50 w-full border-b border-white/10 bg-slate-900/80 backdrop-blur-md"
+        aria-label="主要導覽"
+      >
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+          <a href="index.html" class="text-lg font-semibold tracking-tight text-white">Portfolio</a>
+          <button
+            type="button"
+            id="nav-toggle"
+            class="inline-flex items-center justify-center rounded-lg border border-white/10 p-2 text-slate-200 md:hidden"
+            aria-controls="nav-menu"
+            aria-expanded="false"
+            aria-label="開啟選單"
+          >
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <ul
+            id="nav-menu"
+            class="absolute left-0 right-0 top-full hidden flex-col gap-1 border-b border-white/10 bg-slate-900/95 px-4 py-3 backdrop-blur-md md:static md:flex md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none"
+          >
+            <li><a href="index.html" class="block rounded-lg px-3 py-2 text-slate-300 transition hover:text-white md:inline md:px-0 md:py-0">首頁</a></li>
+            <li><a href="projects.html" class="block rounded-lg px-3 py-2 text-slate-300 transition hover:text-white md:inline md:px-0 md:py-0">作品集</a></li>
+            <li>
+              <a href="about.html" class="block rounded-lg px-3 py-2 font-medium text-cyan-400 md:inline md:px-0 md:py-0" aria-current="page">關於我</a>
+            </li>
+            <li><a href="contact.html" class="block rounded-lg px-3 py-2 text-slate-300 transition hover:text-white md:inline md:px-0 md:py-0">聯絡我</a></li>
+            <li><a href="login.html" class="block rounded-lg px-3 py-2 text-slate-300 transition hover:text-white md:inline md:px-0 md:py-0">登入</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pt-20">
+      <section class="mx-auto max-w-6xl px-4 py-16 md:px-6" aria-labelledby="about-hero-heading">
+        <h1 id="about-hero-heading" class="mb-12 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">
+          關於我
+        </h1>
+
+        <div id="profile-section" class="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-12">
+          <div
+            id="profile-avatar"
+            class="h-48 w-48 shrink-0 rounded-full border-2 border-cyan-400 bg-slate-700"
+            role="img"
+            aria-label="個人頭像預留位置"
+          ></div>
+          <article class="flex-1 text-center md:text-left">
+            <h2 id="profile-name" class="text-3xl font-bold text-white">王小明</h2>
+            <p class="mt-2 text-lg font-medium text-cyan-400">全端網頁開發工程師</p>
+            <div id="profile-bio" class="mt-6 space-y-4 text-slate-300">
+              <p>
+                我熱衷於打造兼具美感與效能的網頁應用，從使用者體驗到系統架構都樂於鑽研。習慣以清晰結構與可維護性為優先，讓產品能隨需求穩定成長。
+              </p>
+              <p>
+                閒暇時喜歡探索新技術、整理開發筆記，也樂於與團隊協作解決實際問題。相信好的程式碼來自持續迭代與真誠溝通。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="border-t border-white/5 bg-slate-900/50 py-16" aria-labelledby="skills-heading">
+        <div class="mx-auto max-w-6xl px-4 md:px-6">
+          <h2 id="skills-heading" class="mb-10 text-center text-3xl font-bold text-white">技能專長</h2>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <article class="skill-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="mb-4 text-3xl" aria-hidden="true">💻</div>
+              <h3 class="mb-4 text-xl font-semibold text-white">前端開發</h3>
+              <ul class="flex flex-wrap gap-2">
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">HTML</span></li>
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">CSS</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">JavaScript</span></li>
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">Tailwind</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">React</span></li>
+              </ul>
+            </article>
+            <article class="skill-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="mb-4 text-3xl" aria-hidden="true">⚙️</div>
+              <h3 class="mb-4 text-xl font-semibold text-white">後端開發</h3>
+              <ul class="flex flex-wrap gap-2">
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">Python</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">FastAPI</span></li>
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">Node.js</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">SQL</span></li>
+              </ul>
+            </article>
+            <article class="skill-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="mb-4 text-3xl" aria-hidden="true">🛠️</div>
+              <h3 class="mb-4 text-xl font-semibold text-white">工具與其他</h3>
+              <ul class="flex flex-wrap gap-2">
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">Git</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">Docker</span></li>
+                <li><span class="rounded-full bg-cyan-400/10 px-3 py-1 text-sm text-cyan-400">VS Code</span></li>
+                <li><span class="rounded-full bg-violet-400/10 px-3 py-1 text-sm text-violet-400">Figma</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-16" aria-labelledby="experience-heading">
+        <div class="mx-auto max-w-6xl px-4 md:px-6">
+          <h2 id="experience-heading" class="mb-12 text-center text-3xl font-bold text-white">工作經歷</h2>
+          <div class="relative mx-auto max-w-3xl border-l-2 border-cyan-400 pl-8 md:pl-10">
+            <article class="timeline-item relative mb-12 last:mb-0">
+              <span class="absolute -left-[calc(0.5rem+1px)] top-1 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-cyan-400 bg-slate-900 md:-left-[calc(0.625rem+1px)]" aria-hidden="true"></span>
+              <p class="text-sm font-medium text-cyan-400">2022 — 至今</p>
+              <h3 class="mt-1 text-xl font-semibold text-white">創新數位股份有限公司</h3>
+              <p class="text-slate-400">資深前端工程師</p>
+              <p class="mt-3 text-slate-300">
+                負責設計系統與元件庫維護，帶領小型團隊交付多個企業官網與內部管理平台，優化核心頁面載入效能與無障礙體驗。
+              </p>
+            </article>
+            <article class="timeline-item relative mb-12 last:mb-0">
+              <span class="absolute -left-[calc(0.5rem+1px)] top-1 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-cyan-400 bg-slate-900 md:-left-[calc(0.625rem+1px)]" aria-hidden="true"></span>
+              <p class="text-sm font-medium text-cyan-400">2019 — 2022</p>
+              <h3 class="mt-1 text-xl font-semibold text-white">雲端科技工作室</h3>
+              <p class="text-slate-400">全端開發工程師</p>
+              <p class="mt-3 text-slate-300">
+                以 React 與 Node.js 建置客製化 SaaS 模組，串接第三方支付與通知服務，並撰寫 API 文件與部署流程。
+              </p>
+            </article>
+            <article class="timeline-item relative">
+              <span class="absolute -left-[calc(0.5rem+1px)] top-1 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-cyan-400 bg-slate-900 md:-left-[calc(0.625rem+1px)]" aria-hidden="true"></span>
+              <p class="text-sm font-medium text-cyan-400">2017 — 2019</p>
+              <h3 class="mt-1 text-xl font-semibold text-white">啟程資訊顧問有限公司</h3>
+              <p class="text-slate-400">網頁開發實習生／助理工程師</p>
+              <p class="mt-3 text-slate-300">
+                參與活動報名網站與後台維運，熟悉 Git 流程與敏捷開發節奏，奠定前後端協作與除錯基礎。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-t border-white/5 bg-slate-900/50 py-16" aria-labelledby="education-heading">
+        <div class="mx-auto max-w-6xl px-4 md:px-6">
+          <h2 id="education-heading" class="mb-10 text-center text-3xl font-bold text-white">學歷</h2>
+          <div class="mx-auto grid max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
+            <article class="education-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <h3 class="text-xl font-semibold text-white">國立科技大學</h3>
+              <p class="mt-2 text-cyan-400">資訊工程學系 學士</p>
+              <p class="mt-2 text-sm text-slate-400">2013 — 2017</p>
+            </article>
+            <article class="education-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <h3 class="text-xl font-semibold text-white">臺北市立高級中學</h3>
+              <p class="mt-2 text-cyan-400">普通科</p>
+              <p class="mt-2 text-sm text-slate-400">2010 — 2013</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mt-auto border-t border-white/10 bg-slate-800 py-10">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 text-center text-slate-400 md:flex-row md:text-left md:px-6">
+        <p class="text-sm">© 2026 Portfolio. 版權所有。</p>
+        <nav aria-label="社群連結">
+          <ul class="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <li>
+              <a href="https://github.com" class="text-slate-300 transition hover:text-cyan-400" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com" class="text-slate-300 transition hover:text-cyan-400" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </li>
+            <li>
+              <a href="mailto:hello@example.com" class="text-slate-300 transition hover:text-cyan-400">Email</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      (function () {
+        var toggle = document.getElementById("nav-toggle");
+        var menu = document.getElementById("nav-menu");
+        if (!toggle || !menu) return;
+
+        toggle.addEventListener("click", function () {
+          var willOpen = menu.classList.contains("hidden");
+          if (willOpen) {
+            menu.classList.remove("hidden");
+            menu.classList.add("flex");
+          } else {
+            menu.classList.add("hidden");
+            menu.classList.remove("flex");
+          }
+          toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+          toggle.setAttribute("aria-label", willOpen ? "關閉選單" : "開啟選單");
+        });
+
+        window.addEventListener("resize", function () {
+          if (window.matchMedia("(min-width: 768px)").matches) {
+            menu.classList.add("hidden");
+            menu.classList.remove("flex");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "開啟選單");
+          }
+        });
+      })();
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from("#profile-avatar", {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      gsap.from("#profile-bio", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power2.out",
+      });
+
+      gsap.set(".skill-card", { opacity: 0, y: 50 });
+      ScrollTrigger.batch(".skill-card", {
+        start: "top 85%",
+        onEnter: function(batch) {
+          gsap.to(batch, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out" });
+        },
+        once: true,
+      });
+
+      gsap.set(".timeline-item", { opacity: 0, x: -30 });
+      ScrollTrigger.batch(".timeline-item", {
+        start: "top 85%",
+        onEnter: function(batch) {
+          gsap.to(batch, { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" });
+        },
+        once: true,
+      });
+
+      gsap.set(".education-card", { opacity: 0, y: 30 });
+      ScrollTrigger.batch(".education-card", {
+        start: "top 85%",
+        onEnter: function(batch) {
+          gsap.to(batch, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out" });
+        },
+        once: true,
+      });
+
+      const API_BASE = 'http://localhost:8000';
+      async function loadProfile() {
+        try {
+          const res = await fetch(`${API_BASE}/api/profile`);
+          const result = await res.json();
+          if (result.success && result.data) {
+            const p = result.data;
+            const nameEl = document.getElementById('profile-name');
+            const bioEl = document.getElementById('profile-bio');
+            if (nameEl && p.name) nameEl.textContent = p.name;
+            if (bioEl && p.bio) {
+              bioEl.innerHTML = `<p>${p.bio}</p>`;
+              if (p.title) {
+                const titleEl = nameEl.parentElement.querySelector('.text-cyan-400');
+                if (titleEl) titleEl.textContent = p.title;
+              }
+            }
+          }
+        } catch (err) {
+          console.error('載入個人資料失敗', err);
+        }
+      }
+      loadProfile();
+    </script>
+  </body>
+</html>

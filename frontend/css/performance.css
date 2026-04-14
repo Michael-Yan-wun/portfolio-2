@@ -1,0 +1,46 @@
+/* GPU 加速與防抖動 */
+.project-card,
+.skill-card,
+.timeline-item,
+.education-card,
+.info-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 無障礙：尊重使用者的減少動畫偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-gradient-bg {
+    animation: none !important;
+  }
+
+  .typewriter-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* 圖片最佳化 */
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 按鈕觸控目標最小尺寸 */
+button,
+a[role="button"],
+.btn {
+  min-height: 48px;
+  min-width: 48px;
+}

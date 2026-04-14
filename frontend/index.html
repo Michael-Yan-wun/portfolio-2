@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>作品集 | 首頁</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/performance.css">
+  <style>
+    /* Hero 背景漸層動畫 */
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .hero-gradient-bg {
+      background: linear-gradient(
+        -45deg,
+        #0f172a,
+        #1e1b4b,
+        #0c4a6e,
+        #312e81,
+        #0f172a
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+    }
+
+    /* 卡片 hover 過渡 */
+    .project-card {
+      transition: all 0.3s ease;
+    }
+
+    /* 打字游標閃爍 */
+    @keyframes cursorBlink {
+      0%,
+      50% {
+        opacity: 1;
+      }
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .typewriter-cursor {
+      animation: cursorBlink 1s step-end infinite;
+    }
+
+    /* 行動選單開合 */
+    #mobile-menu:not(.hidden) {
+      display: flex;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased overflow-x-hidden">
+  <!-- 導覽列 -->
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-white/10"
+  >
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
+      <a href="index.html" class="text-lg font-semibold tracking-tight text-white">
+        Portfolio
+      </a>
+
+      <!-- 桌面選單 -->
+      <ul class="hidden items-center gap-8 text-sm font-medium md:flex">
+        <li>
+          <a href="index.html" class="text-cyan-400 transition hover:text-cyan-300">首頁</a>
+        </li>
+        <li>
+          <a href="projects.html" class="text-slate-300 transition hover:text-white">作品集</a>
+        </li>
+        <li>
+          <a href="about.html" class="text-slate-300 transition hover:text-white">關於我</a>
+        </li>
+        <li>
+          <a href="contact.html" class="text-slate-300 transition hover:text-white">聯絡我</a>
+        </li>
+        <li>
+          <a href="login.html" class="text-slate-300 transition hover:text-white">登入</a>
+        </li>
+      </ul>
+
+      <!-- 漢堡按鈕 -->
+      <button
+        type="button"
+        id="menu-toggle"
+        class="inline-flex items-center justify-center rounded-lg border border-white/10 p-2 text-slate-200 md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="開啟選單"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- 行動選單 -->
+    <div
+      id="mobile-menu"
+      class="hidden flex-col border-t border-white/10 bg-slate-900/95 px-4 py-4 backdrop-blur-md md:hidden"
+    >
+      <ul class="flex flex-col gap-3 text-sm font-medium">
+        <li>
+          <a href="index.html" class="block py-2 text-cyan-400">首頁</a>
+        </li>
+        <li>
+          <a href="projects.html" class="block py-2 text-slate-300 hover:text-white">作品集</a>
+        </li>
+        <li>
+          <a href="about.html" class="block py-2 text-slate-300 hover:text-white">關於我</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 text-slate-300 hover:text-white">聯絡我</a>
+        </li>
+        <li>
+          <a href="login.html" class="block py-2 text-slate-300 hover:text-white">登入</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section
+      class="hero-gradient-bg relative flex min-h-screen flex-col items-center justify-center px-4 pt-24 pb-16 text-center md:px-6"
+    >
+      <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent"
+      ></div>
+      <div class="relative z-10 mx-auto max-w-4xl">
+        <p class="hero-anim mb-4 text-sm font-medium uppercase tracking-[0.2em] text-cyan-400/90">
+          Welcome
+        </p>
+        <h1
+          class="hero-anim mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+          <span class="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
+            Hi，我是你的名字
+          </span>
+        </h1>
+        <p class="hero-anim mb-2 text-xl text-slate-200 sm:text-2xl md:text-3xl">
+          <span id="typewriter-text"></span><span class="typewriter-cursor text-cyan-400">|</span>
+        </p>
+        <p
+          class="hero-anim mx-auto mb-10 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg"
+        >
+          我熱衷於打造流暢的使用者體驗與穩健的系統架構，結合設計思維與工程實作，讓想法落地成可觸及的數位產品。
+        </p>
+        <div class="hero-anim flex flex-wrap items-center justify-center">
+          <a
+            href="projects.html"
+            class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/30 active:scale-[0.98]"
+          >
+            瀏覽作品
+            <svg
+              class="h-4 w-4 transition group-hover:translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-slate-500 md:block"
+        aria-hidden="true"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- 精選作品 -->
+    <section class="relative border-t border-white/5 bg-slate-950 py-20 md:py-28">
+      <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.06),transparent_50%)]"
+      ></div>
+      <div class="relative mx-auto max-w-6xl px-4 md:px-6">
+        <header class="mb-12 text-center md:mb-16">
+          <h2 class="section-title text-3xl font-bold tracking-tight text-white md:text-4xl">
+            精選作品
+          </h2>
+          <p class="mx-auto mt-4 max-w-xl text-slate-400">
+            從概念到上線，每個專案都是一次學習與成長的紀錄。
+          </p>
+        </header>
+
+        <div id="featured-projects" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- 由 API 動態載入 -->
+        </div>
+
+        <div class="mt-12 flex justify-center md:mt-16">
+          <a
+            href="projects.html"
+            class="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-8 py-3 text-sm font-semibold text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-500/20 hover:text-cyan-200"
+          >
+            查看所有作品
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁尾 -->
+  <footer class="border-t border-white/10 bg-slate-800">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 py-10 md:flex-row md:px-6">
+      <p class="text-center text-sm text-slate-400 md:text-left">
+        © 2026 你的名字 · 保留所有權利。
+      </p>
+      <div class="flex items-center gap-5">
+        <a
+          href="https://github.com"
+          class="text-slate-400 transition hover:text-cyan-400"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://www.linkedin.com"
+          class="text-slate-400 transition hover:text-cyan-400"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to('.hero-gradient-bg', {
+        scrollTrigger: { trigger: '.hero-gradient-bg', start: 'top top', end: 'bottom top', scrub: true },
+        backgroundPosition: '50% 100%', ease: 'none',
+      });
+
+      // Hero 進場
+      gsap.from('.hero-anim', {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power2.out',
+      });
+
+      // 區塊標題
+      gsap.from('.section-title', {
+        scrollTrigger: {
+          trigger: '.section-title',
+          start: 'top 80%',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
+
+      // 從 API 載入精選作品（最新 3 筆）
+      const API_BASE = 'http://localhost:8000';
+      async function loadFeaturedProjects() {
+        try {
+          const res = await fetch(`${API_BASE}/api/projects`);
+          const result = await res.json();
+          if (result.success && result.data.length > 0) {
+            const container = document.getElementById('featured-projects');
+            container.innerHTML = result.data.slice(0, 3).map(p => {
+              const techs = (p.tech_stack || '').split(',').map(t => t.trim()).filter(Boolean);
+              const techHtml = techs.map(t =>
+                `<span class="rounded-md bg-cyan-400/10 px-2 py-0.5 text-xs font-medium text-cyan-300">${t}</span>`
+              ).join('');
+              return `
+                <article class="project-card group rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/10 hover:shadow-lg hover:shadow-cyan-400/10">
+                  <h3 class="mb-2 text-xl font-semibold text-white">${p.title}</h3>
+                  <p class="mb-4 text-sm leading-relaxed text-slate-400">${p.description || ''}</p>
+                  <div class="flex flex-wrap gap-2">${techHtml}</div>
+                </article>`;
+            }).join('');
+            ScrollTrigger.refresh();
+            var featuredCards = document.querySelectorAll('#featured-projects .project-card');
+            gsap.set(featuredCards, { opacity: 0, y: 50 });
+            ScrollTrigger.create({
+              trigger: '#featured-projects',
+              start: 'top 85%',
+              once: true,
+              onEnter: function() {
+                gsap.to(featuredCards, {
+                  opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+                });
+              },
+            });
+          }
+        } catch (err) {
+          console.error('載入精選作品失敗', err);
+        }
+      }
+      loadFeaturedProjects();
+
+      // 打字機（純 JS）
+      const jobTitles = ['全端開發者', 'UI/UX 愛好者', '終身學習者'];
+      const typewriterEl = document.getElementById('typewriter-text');
+      let titleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function typewriterTick() {
+        const fullTitle = jobTitles[titleIndex];
+        if (!isDeleting) {
+          charIndex++;
+          typewriterEl.textContent = fullTitle.slice(0, charIndex);
+          if (charIndex === fullTitle.length) {
+            isDeleting = true;
+            setTimeout(typewriterTick, 2000);
+            return;
+          }
+        } else {
+          charIndex--;
+          typewriterEl.textContent = fullTitle.slice(0, charIndex);
+          if (charIndex === 0) {
+            isDeleting = false;
+            titleIndex = (titleIndex + 1) % jobTitles.length;
+          }
+        }
+        setTimeout(typewriterTick, isDeleting ? 45 : 90);
+      }
+
+      setTimeout(typewriterTick, 600);
+
+      // 行動選單
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', function () {
+        const isOpen = mobileMenu.classList.toggle('hidden') === false;
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuToggle.setAttribute('aria-label', isOpen ? '關閉選單' : '開啟選單');
+      });
+    })();
+  </script>
+</body>
+</html>

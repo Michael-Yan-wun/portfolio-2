@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>作品集 | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/performance.css">
+  </head>
+  <body class="bg-slate-900 text-white min-h-screen flex flex-col">
+    <header
+      class="fixed top-0 z-50 w-full bg-slate-900/80 backdrop-blur-md border-b border-white/10"
+    >
+      <nav
+        class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-label="主要導覽"
+      >
+        <div class="flex h-16 items-center justify-between">
+          <div class="flex shrink-0 items-center md:hidden">
+            <button
+              type="button"
+              id="menu-toggle"
+              class="inline-flex items-center justify-center rounded-lg p-2 text-slate-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              aria-label="開啟選單"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="hidden md:flex md:flex-1 md:items-center md:justify-center md:gap-8"
+          >
+            <a
+              href="index.html"
+              class="text-sm font-medium text-slate-200 transition hover:text-white"
+              >首頁</a
+            >
+            <a
+              href="projects.html"
+              class="text-sm font-medium text-cyan-400"
+              aria-current="page"
+              >作品集</a
+            >
+            <a
+              href="about.html"
+              class="text-sm font-medium text-slate-200 transition hover:text-white"
+              >關於我</a
+            >
+            <a
+              href="contact.html"
+              class="text-sm font-medium text-slate-200 transition hover:text-white"
+              >聯絡我</a
+            >
+            <a
+              href="login.html"
+              class="text-sm font-medium text-slate-200 transition hover:text-white"
+              >登入</a
+            >
+          </div>
+          <div class="h-10 w-10 shrink-0 md:hidden" aria-hidden="true"></div>
+        </div>
+        <div
+          class="absolute left-0 right-0 top-full z-40 hidden border-b border-white/10 bg-slate-900/95 backdrop-blur-md md:hidden"
+          id="mobile-menu"
+        >
+          <ul class="flex flex-col gap-1 px-4 py-4 sm:px-6">
+            <li>
+              <a
+                href="index.html"
+                class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-white"
+                >首頁</a
+              >
+            </li>
+            <li>
+              <a
+                href="projects.html"
+                class="block rounded-lg px-3 py-2 text-sm font-medium text-cyan-400 bg-white/5"
+                aria-current="page"
+                >作品集</a
+              >
+            </li>
+            <li>
+              <a
+                href="about.html"
+                class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-white"
+                >關於我</a
+              >
+            </li>
+            <li>
+              <a
+                href="contact.html"
+                class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-white"
+                >聯絡我</a
+              >
+            </li>
+            <li>
+              <a
+                href="login.html"
+                class="block rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-white"
+                >登入</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1">
+      <section
+        class="mx-auto max-w-7xl px-4 pt-28 pb-12 sm:px-6 sm:pt-32 lg:px-8"
+        aria-labelledby="page-title"
+      >
+        <h1
+          id="page-title"
+          class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent"
+        >
+          我的作品集
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-slate-300">
+          這裡展示了我的精選專案與作品
+        </p>
+      </section>
+
+      <section
+        class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8"
+        aria-label="專案列表"
+      >
+        <div
+          id="projects-container"
+          class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <!-- 由 API 動態載入 -->
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="mt-auto border-t border-white/10 bg-slate-800"
+      role="contentinfo"
+    >
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6 lg:px-8"
+      >
+        <p class="text-center text-sm text-slate-400 sm:text-left">
+          © 2026 Portfolio. 版權所有。
+        </p>
+        <nav class="flex items-center gap-6" aria-label="社群連結">
+          <a
+            href="https://github.com"
+            class="text-sm text-slate-400 transition hover:text-cyan-400"
+            rel="noopener noreferrer"
+            target="_blank"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com"
+            class="text-sm text-slate-400 transition hover:text-cyan-400"
+            rel="noopener noreferrer"
+            target="_blank"
+            >LinkedIn</a
+          >
+          <a
+            href="https://twitter.com"
+            class="text-sm text-slate-400 transition hover:text-cyan-400"
+            rel="noopener noreferrer"
+            target="_blank"
+            >X</a
+          >
+        </nav>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      (function () {
+        var btn = document.getElementById("menu-toggle");
+        var menu = document.getElementById("mobile-menu");
+        if (!btn || !menu) return;
+
+        btn.addEventListener("click", function () {
+          var open = menu.classList.toggle("hidden") === false;
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.setAttribute(
+            "aria-label",
+            open ? "關閉選單" : "開啟選單"
+          );
+        });
+
+        menu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            if (window.matchMedia("(max-width: 767px)").matches) {
+              menu.classList.add("hidden");
+              btn.setAttribute("aria-expanded", "false");
+              btn.setAttribute("aria-label", "開啟選單");
+            }
+          });
+        });
+      })();
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from("#page-title", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+
+      gsap.from("#page-title + p", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power2.out",
+      });
+
+      const API_BASE = 'http://localhost:8000';
+      async function loadProjects() {
+        try {
+          const res = await fetch(`${API_BASE}/api/projects`);
+          const result = await res.json();
+          if (result.success && result.data) {
+            const container = document.getElementById('projects-container');
+            container.innerHTML = result.data.map(p => {
+              const techs = (p.tech_stack || '').split(',').map(t => t.trim()).filter(Boolean);
+              const techHtml = techs.map(t =>
+                `<span class="rounded-full bg-cyan-400/10 px-2 py-1 text-xs text-cyan-400">${t}</span>`
+              ).join('');
+              const demoLink = p.demo_url ? `<a href="${p.demo_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg border border-white/20 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-cyan-400/50 hover:text-cyan-300">Demo</a>` : '';
+              const githubLink = p.github_url ? `<a href="${p.github_url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-lg border border-white/20 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-cyan-400/50 hover:text-cyan-300">GitHub</a>` : '';
+              return `
+                <article class="project-card flex flex-col bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-cyan-400/30 hover:shadow-lg hover:shadow-cyan-400/10 hover:-translate-y-1">
+                  <div class="flex h-48 items-center justify-center rounded-lg bg-slate-700 text-slate-400" role="img" aria-label="${p.title} 預覽圖">
+                    <span class="text-sm">${p.image_url ? `<img src="${p.image_url}" alt="${p.title}" class="h-full w-full object-cover rounded-lg">` : '預覽圖'}</span>
+                  </div>
+                  <h2 class="mt-4 text-xl font-bold text-white">${p.title}</h2>
+                  <p class="mt-2 flex-1 text-sm text-slate-300">${p.description || ''}</p>
+                  <div class="mt-4 flex flex-wrap gap-2">${techHtml}</div>
+                  <div class="mt-4 flex flex-wrap gap-2">${demoLink}${githubLink}</div>
+                </article>`;
+            }).join('');
+
+            const cards = document.querySelectorAll('.project-card');
+            gsap.set(cards, { opacity: 0, y: 50 });
+            gsap.to(cards, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+              delay: 0.1,
+            });
+          }
+        } catch (err) {
+          console.error('載入作品失敗', err);
+        }
+      }
+      loadProjects();
+    </script>
+  </body>
+</html>

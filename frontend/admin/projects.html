@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品管理 — 管理後台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <aside class="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col bg-slate-800 shadow-lg" aria-label="後台導覽">
+        <header class="border-b border-white/10 px-6 py-5">
+            <p class="text-lg font-semibold tracking-wide text-cyan-400">管理後台</p>
+        </header>
+        <nav class="flex flex-1 flex-col py-4" aria-label="主選單">
+            <a href="dashboard.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">儀表板</a>
+            <a href="projects.html" class="block border-l-2 border-cyan-400 bg-white/5 px-6 py-3 text-cyan-400 transition-colors duration-200" aria-current="page">作品管理</a>
+            <a href="messages.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">留言管理</a>
+            <a href="profile.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">個人資料</a>
+        </nav>
+        <div class="mt-auto border-t border-white/10 p-4">
+            <button type="button" onclick="logout()" class="block w-full rounded-lg px-6 py-3 text-left text-slate-400 transition-colors duration-200 hover:text-red-400">登出</button>
+        </div>
+    </aside>
+
+    <main class="ml-64 min-h-screen bg-slate-900 p-8">
+        <header class="mb-8 flex flex-wrap items-center justify-between gap-4">
+            <h1 class="text-2xl font-bold text-white">作品管理</h1>
+            <button type="button" onclick="openAdd()" class="rounded-lg bg-cyan-500 px-4 py-2 font-medium text-white transition-colors hover:bg-cyan-600">新增作品</button>
+        </header>
+
+        <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading" class="sr-only">作品列表</h2>
+            <div class="overflow-hidden rounded-xl border border-white/10 bg-slate-800">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[640px] text-left text-sm">
+                        <thead>
+                            <tr class="border-b border-white/10 bg-slate-700 text-slate-300">
+                                <th scope="col" class="px-6 py-3 font-medium">標題</th>
+                                <th scope="col" class="px-6 py-3 font-medium">技術</th>
+                                <th scope="col" class="px-6 py-3 font-medium">建立日期</th>
+                                <th scope="col" class="px-6 py-3 font-medium">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-12 border-t border-white/10 pt-6 text-sm text-slate-500">
+            <p>© 管理後台</p>
+        </footer>
+    </main>
+
+    <div id="project-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" onclick="closeModal()" aria-hidden="true"></div>
+        <div class="relative mx-auto mt-20 max-w-lg rounded-xl border border-white/10 bg-slate-800 p-6 shadow-xl">
+            <h2 id="modal-title" class="mb-6 text-xl font-semibold text-white">新增作品</h2>
+            <form id="project-form" onsubmit="event.preventDefault(); saveProject();">
+                <input type="hidden" id="edit-id" value="">
+                <div class="space-y-4">
+                    <div>
+                        <label for="field-title" class="mb-1 block text-sm text-slate-300">標題</label>
+                        <input id="field-title" name="title" type="text" required class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="field-description" class="mb-1 block text-sm text-slate-300">描述</label>
+                        <textarea id="field-description" name="description" rows="4" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"></textarea>
+                    </div>
+                    <div>
+                        <label for="field-tech_stack" class="mb-1 block text-sm text-slate-300">技術標籤</label>
+                        <input id="field-tech_stack" name="tech_stack" type="text" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="field-image_url" class="mb-1 block text-sm text-slate-300">圖片網址</label>
+                        <input id="field-image_url" name="image_url" type="text" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="field-demo_url" class="mb-1 block text-sm text-slate-300">Demo 網址</label>
+                        <input id="field-demo_url" name="demo_url" type="text" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                    </div>
+                    <div>
+                        <label for="field-github_url" class="mb-1 block text-sm text-slate-300">GitHub 網址</label>
+                        <input id="field-github_url" name="github_url" type="text" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal()" class="rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-slate-200 transition-colors hover:bg-slate-600">取消</button>
+                    <button type="submit" class="rounded-lg bg-cyan-500 px-4 py-2 font-medium text-white transition-colors hover:bg-cyan-600">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        checkAuth();
+
+        let editingId = null;
+
+        async function loadProjects() {
+            try {
+                const data = await authFetch(`${API_BASE}/api/projects`);
+                if (data && data.success) {
+                    renderProjects(data.data);
+                }
+            } catch (err) {
+                showToast('載入作品失敗', 'error');
+            }
+        }
+
+        function renderProjects(projects) {
+            const tbody = document.getElementById('projects-tbody');
+            tbody.innerHTML = projects.map(p => `
+                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <td class="px-6 py-4 text-white">${p.title}</td>
+                    <td class="px-6 py-4 text-slate-300">${p.tech_stack || '-'}</td>
+                    <td class="px-6 py-4 text-slate-400">${p.created_at || '-'}</td>
+                    <td class="px-6 py-4">
+                        <button type="button" onclick="openEdit(${p.id})" class="text-cyan-400 hover:text-cyan-300 mr-3">編輯</button>
+                        <button type="button" onclick="deleteProject(${p.id})" class="text-red-400 hover:text-red-300">刪除</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openModal(title = '新增作品') {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.getElementById('project-form').reset();
+            document.getElementById('edit-id').value = '';
+            editingId = null;
+        }
+
+        function openAdd() {
+            editingId = null;
+            document.getElementById('edit-id').value = '';
+            openModal('新增作品');
+        }
+
+        async function openEdit(id) {
+            try {
+                const data = await authFetch(`${API_BASE}/api/projects/${id}`);
+                if (data && data.success) {
+                    editingId = id;
+                    document.getElementById('edit-id').value = String(id);
+                    const p = data.data;
+                    document.getElementById('field-title').value = p.title || '';
+                    document.getElementById('field-description').value = p.description || '';
+                    document.getElementById('field-tech_stack').value = p.tech_stack || '';
+                    document.getElementById('field-image_url').value = p.image_url || '';
+                    document.getElementById('field-demo_url').value = p.demo_url || '';
+                    document.getElementById('field-github_url').value = p.github_url || '';
+                    openModal('編輯作品');
+                }
+            } catch (err) {
+                showToast('載入作品資料失敗', 'error');
+            }
+        }
+
+        async function saveProject() {
+            const body = {
+                title: document.getElementById('field-title').value,
+                description: document.getElementById('field-description').value,
+                tech_stack: document.getElementById('field-tech_stack').value,
+                image_url: document.getElementById('field-image_url').value,
+                demo_url: document.getElementById('field-demo_url').value,
+                github_url: document.getElementById('field-github_url').value,
+            };
+
+            try {
+                let data;
+                if (editingId) {
+                    data = await authFetch(`${API_BASE}/api/projects/${editingId}`, {
+                        method: 'PUT', body: JSON.stringify(body)
+                    });
+                } else {
+                    data = await authFetch(`${API_BASE}/api/projects`, {
+                        method: 'POST', body: JSON.stringify(body)
+                    });
+                }
+
+                if (data && data.success) {
+                    showToast(editingId ? '作品更新成功' : '作品新增成功');
+                    closeModal();
+                    loadProjects();
+                } else {
+                    showToast(data?.message || '操作失敗', 'error');
+                }
+            } catch (err) {
+                showToast('操作失敗', 'error');
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!confirm('確定要刪除這個作品嗎？')) return;
+            try {
+                const data = await authFetch(`${API_BASE}/api/projects/${id}`, { method: 'DELETE' });
+                if (data && data.success) {
+                    showToast('作品已刪除');
+                    loadProjects();
+                } else {
+                    showToast(data?.message || '刪除失敗', 'error');
+                }
+            } catch (err) {
+                showToast('刪除失敗', 'error');
+            }
+        }
+
+        loadProjects();
+    </script>
+</body>
+</html>

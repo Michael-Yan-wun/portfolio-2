@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言管理 — 管理後台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white">
+    <aside class="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col bg-slate-800 shadow-lg" aria-label="後台導覽">
+        <header class="border-b border-white/10 px-6 py-5">
+            <p class="text-lg font-semibold tracking-wide text-cyan-400">管理後台</p>
+        </header>
+        <nav class="flex flex-1 flex-col py-4" aria-label="主選單">
+            <a href="dashboard.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">儀表板</a>
+            <a href="projects.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">作品管理</a>
+            <a href="messages.html" class="block border-l-2 border-cyan-400 bg-white/5 px-6 py-3 text-cyan-400 transition-colors duration-200" aria-current="page">留言管理</a>
+            <a href="profile.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">個人資料</a>
+        </nav>
+        <div class="mt-auto border-t border-white/10 p-4">
+            <button type="button" onclick="logout()" class="block w-full rounded-lg px-6 py-3 text-left text-slate-400 transition-colors duration-200 hover:text-red-400">登出</button>
+        </div>
+    </aside>
+
+    <main class="ml-64 min-h-screen bg-slate-900 p-8">
+        <header class="mb-8">
+            <h1 class="text-2xl font-bold text-white">留言管理</h1>
+        </header>
+
+        <section class="overflow-hidden rounded-xl border border-white/10 bg-slate-800" aria-label="留言列表">
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-sm">
+                    <thead class="border-b border-white/10 bg-slate-800/80 text-slate-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 font-medium">寄件人</th>
+                            <th scope="col" class="px-6 py-4 font-medium">Email</th>
+                            <th scope="col" class="px-6 py-4 font-medium">內容預覽</th>
+                            <th scope="col" class="px-6 py-4 font-medium">日期</th>
+                            <th scope="col" class="px-6 py-4 font-medium">狀態</th>
+                            <th scope="col" class="px-6 py-4 font-medium">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="message-modal" class="fixed inset-0 z-50 hidden bg-black/60" role="dialog" aria-modal="true" aria-labelledby="message-modal-title">
+        <div class="flex min-h-full items-center justify-center p-4">
+        <div class="relative w-full max-w-lg rounded-xl border border-white/10 bg-slate-800 p-6 shadow-xl">
+            <h2 id="message-modal-title" class="sr-only">留言詳情</h2>
+            <div class="space-y-4 text-sm">
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-slate-500">寄件人</p>
+                    <p id="detail-name" class="mt-1 text-white"></p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-slate-500">Email</p>
+                    <p id="detail-email" class="mt-1 text-slate-300"></p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-slate-500">日期</p>
+                    <p id="detail-date" class="mt-1 text-slate-400"></p>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-slate-500">完整內容</p>
+                    <p id="detail-content" class="mt-2 max-h-64 overflow-y-auto whitespace-pre-wrap text-slate-200"></p>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button type="button" onclick="closeMessageModal()" class="rounded-lg border border-white/10 bg-slate-700 px-4 py-2 text-sm text-white transition-colors hover:bg-slate-600">關閉</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        checkAuth();
+
+        async function loadMessages() {
+            try {
+                const data = await authFetch(`${API_BASE}/api/messages`);
+                if (data && data.success) {
+                    renderMessages(data.data);
+                }
+            } catch (err) {
+                showToast('載入留言失敗', 'error');
+            }
+        }
+
+        function renderMessages(messages) {
+            const tbody = document.getElementById('messages-tbody');
+            tbody.innerHTML = messages.map(m => {
+                const isUnread = !m.is_read;
+                const rowClass = isUnread ? 'bg-cyan-400/5 border-l-2 border-cyan-400' : '';
+                const preview = m.content.length > 30 ? m.content.substring(0, 30) + '...' : m.content;
+                const statusBadge = isUnread
+                    ? '<span class="bg-cyan-400/10 text-cyan-400 px-2 py-1 rounded-full text-xs">未讀</span>'
+                    : '<span class="bg-slate-600 text-slate-300 px-2 py-1 rounded-full text-xs">已讀</span>';
+                return `
+            <tr class="${rowClass} border-b border-white/5 hover:bg-white/5 transition-colors">
+                <td class="px-6 py-4 text-white">${m.name}</td>
+                <td class="px-6 py-4 text-slate-300">${m.email}</td>
+                <td class="px-6 py-4 text-slate-400">${preview}</td>
+                <td class="px-6 py-4 text-slate-400">${m.created_at || '-'}</td>
+                <td class="px-6 py-4">${statusBadge}</td>
+                <td class="px-6 py-4 space-x-2">
+                    <button onclick="viewMessage(${m.id})" class="text-cyan-400 hover:text-cyan-300">查看</button>
+                    ${isUnread ? `<button onclick="markRead(${m.id})" class="text-emerald-400 hover:text-emerald-300">已讀</button>` : ''}
+                    <button onclick="deleteMessage(${m.id})" class="text-red-400 hover:text-red-300">刪除</button>
+                </td>
+            </tr>`;
+            }).join('');
+        }
+
+        async function viewMessage(id) {
+            try {
+                const data = await authFetch(`${API_BASE}/api/messages/${id}`);
+                if (data && data.success) {
+                    const m = data.data;
+                    document.getElementById('detail-name').textContent = m.name;
+                    document.getElementById('detail-email').textContent = m.email;
+                    document.getElementById('detail-date').textContent = m.created_at;
+                    document.getElementById('detail-content').textContent = m.content;
+                    document.getElementById('message-modal').classList.remove('hidden');
+
+                    if (!m.is_read) {
+                        await markRead(id);
+                    }
+                }
+            } catch (err) {
+                showToast('載入留言詳情失敗', 'error');
+            }
+        }
+
+        function closeMessageModal() {
+            document.getElementById('message-modal').classList.add('hidden');
+        }
+
+        async function markRead(id) {
+            try {
+                const data = await authFetch(`${API_BASE}/api/messages/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ is_read: 1 })
+                });
+                if (data && data.success) {
+                    loadMessages();
+                }
+            } catch (err) {
+                showToast('標記已讀失敗', 'error');
+            }
+        }
+
+        async function deleteMessage(id) {
+            if (!confirm('確定要刪除這則留言嗎？')) return;
+            try {
+                const data = await authFetch(`${API_BASE}/api/messages/${id}`, { method: 'DELETE' });
+                if (data && data.success) {
+                    showToast('留言已刪除');
+                    loadMessages();
+                }
+            } catch (err) {
+                showToast('刪除失敗', 'error');
+            }
+        }
+
+        loadMessages();
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聯絡我 | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/performance.css">
+    <style>
+      /* 表單欄位 focus 光暈過渡 */
+      .form-input {
+        transition:
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .form-input:focus {
+        box-shadow: 0 0 0 1px rgb(34 211 238 / 0.35);
+      }
+      .info-card {
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease,
+          background-color 0.3s ease;
+      }
+      .info-card:hover {
+        transform: translateY(-4px);
+        border-color: rgb(255 255 255 / 0.2);
+        box-shadow: 0 12px 40px -12px rgb(34 211 238 / 0.15);
+        background-color: rgb(255 255 255 / 0.08);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-900 text-white antialiased">
+    <header
+      class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-md"
+    >
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:px-8">
+        <a href="index.html" class="text-lg font-semibold tracking-tight text-white">Portfolio</a>
+        <button
+          type="button"
+          id="nav-toggle"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-slate-200 hover:bg-white/5 lg:hidden"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+          aria-label="開啟選單"
+        >
+          <span class="sr-only">選單</span>
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <ul
+          id="desktop-nav"
+          class="hidden items-center gap-8 text-sm font-medium text-slate-300 lg:flex"
+        >
+          <li><a href="index.html" class="transition-colors hover:text-white">首頁</a></li>
+          <li><a href="projects.html" class="transition-colors hover:text-white">作品集</a></li>
+          <li><a href="about.html" class="transition-colors hover:text-white">關於我</a></li>
+          <li>
+            <a href="contact.html" class="text-cyan-400 transition-colors hover:text-cyan-300"
+              >聯絡我</a
+            >
+          </li>
+          <li><a href="login.html" class="transition-colors hover:text-white">登入</a></li>
+        </ul>
+      </nav>
+      <div
+        id="mobile-nav"
+        class="hidden border-t border-white/10 bg-slate-900/95 px-4 py-4 backdrop-blur-md lg:hidden"
+        hidden
+      >
+        <ul class="flex flex-col gap-3 text-sm font-medium text-slate-300">
+          <li><a href="index.html" class="block rounded-lg px-3 py-2 hover:bg-white/5">首頁</a></li>
+          <li>
+            <a href="projects.html" class="block rounded-lg px-3 py-2 hover:bg-white/5">作品集</a>
+          </li>
+          <li><a href="about.html" class="block rounded-lg px-3 py-2 hover:bg-white/5">關於我</a></li>
+          <li>
+            <a
+              href="contact.html"
+              class="block rounded-lg px-3 py-2 text-cyan-400 hover:bg-white/5"
+              >聯絡我</a
+            >
+          </li>
+          <li><a href="login.html" class="block rounded-lg px-3 py-2 hover:bg-white/5">登入</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+      <section class="mx-auto max-w-6xl px-4 lg:px-8">
+        <header class="mb-12 text-center lg:mb-16">
+          <h1
+            id="page-title"
+            class="mb-4 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl"
+          >
+            聯絡我
+          </h1>
+          <p class="mx-auto max-w-2xl text-base text-slate-300 sm:text-lg">
+            有任何合作或專案想法，歡迎填寫表單與我聯繫，我會盡快回覆您。
+          </p>
+        </header>
+
+        <section
+          class="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12"
+          aria-labelledby="contact-heading"
+        >
+          <h2 id="contact-heading" class="sr-only">聯絡表單與資訊</h2>
+
+          <article
+            id="form-card"
+            class="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-lg"
+          >
+            <form id="contact-form" class="space-y-6" novalidate>
+              <div>
+                <label for="name" class="mb-2 block text-sm text-slate-300">姓名</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  class="form-input w-full rounded-lg border border-white/10 bg-slate-800/50 px-4 py-3 text-white focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  placeholder="請輸入您的姓名"
+                />
+              </div>
+              <div>
+                <label for="email" class="mb-2 block text-sm text-slate-300">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  class="form-input w-full rounded-lg border border-white/10 bg-slate-800/50 px-4 py-3 text-white focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <div>
+                <label for="content" class="mb-2 block text-sm text-slate-300">訊息內容</label>
+                <textarea
+                  id="content"
+                  name="content"
+                  rows="5"
+                  class="form-input w-full resize-y rounded-lg border border-white/10 bg-slate-800/50 px-4 py-3 text-white focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+                  placeholder="請簡述您的需求或問題…"
+                ></textarea>
+              </div>
+
+              <div
+                id="form-success"
+                class="hidden rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300"
+                role="status"
+              >
+                訊息已成功送出，感謝您的聯繫！（Phase 4 將串接後端 API）
+              </div>
+              <div
+                id="form-error"
+                class="hidden rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+                role="alert"
+              ></div>
+
+              <button
+                type="submit"
+                class="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:opacity-90 sm:w-auto"
+              >
+                送出訊息
+              </button>
+            </form>
+          </article>
+
+          <aside id="info-cards" class="flex flex-col gap-4" aria-label="聯絡方式">
+            <article class="info-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl" aria-hidden="true">✉️</span>
+                <div>
+                  <h3 class="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-400">
+                    Email
+                  </h3>
+                  <a
+                    href="mailto:your-email@example.com"
+                    class="text-white transition-colors hover:text-cyan-400"
+                    >your-email@example.com</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article class="info-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl" aria-hidden="true">🐙</span>
+                <div>
+                  <h3 class="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-400">
+                    GitHub
+                  </h3>
+                  <a
+                    href="https://github.com/yourusername"
+                    class="break-all text-white transition-colors hover:text-cyan-400"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >github.com/yourusername</a
+                  >
+                </div>
+              </div>
+            </article>
+            <article class="info-card rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl" aria-hidden="true">💼</span>
+                <div>
+                  <h3 class="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-400">
+                    LinkedIn
+                  </h3>
+                  <a
+                    href="https://linkedin.com/in/yourusername"
+                    class="break-all text-white transition-colors hover:text-cyan-400"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >linkedin.com/in/yourusername</a
+                  >
+                </div>
+              </div>
+            </article>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 bg-slate-800 py-10">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 sm:flex-row lg:px-8">
+        <p class="text-center text-sm text-slate-400 sm:text-left">
+          © 2026 Portfolio. 版權所有。
+        </p>
+        <div class="flex items-center gap-6 text-sm text-slate-300">
+          <a
+            href="https://github.com/yourusername"
+            class="transition-colors hover:text-cyan-400"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <a
+            href="https://linkedin.com/in/yourusername"
+            class="transition-colors hover:text-cyan-400"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      /** Phase 4 將串接後端 API */
+      const API_BASE = 'http://localhost:8000';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from('#page-title', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
+
+      gsap.set('#form-card', { opacity: 0, y: 50 });
+      gsap.to('#form-card', {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.3,
+      });
+
+      gsap.set('.info-card', { opacity: 0, y: 30 });
+      gsap.to('.info-card', {
+        opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out', delay: 0.5,
+      });
+
+      const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+          gsap.fromTo(submitBtn, { scale: 1 }, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1, ease: 'elastic.out(1, 0.3)' });
+        });
+      }
+
+      (function navMobile() {
+        const toggle = document.getElementById('nav-toggle');
+        const panel = document.getElementById('mobile-nav');
+        if (!toggle || !panel) return;
+
+        function setOpen(open) {
+          panel.classList.toggle('hidden', !open);
+          panel.hidden = !open;
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          toggle.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
+        }
+
+        toggle.addEventListener('click', function () {
+          setOpen(panel.classList.contains('hidden'));
+        });
+
+        panel.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            setOpen(false);
+          });
+        });
+      })();
+
+      (function contactForm() {
+        const form = document.getElementById('contact-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const contentInput = document.getElementById('content');
+        const successEl = document.getElementById('form-success');
+        const errorEl = document.getElementById('form-error');
+
+        if (!form || !nameInput || !emailInput || !contentInput || !successEl || !errorEl) return;
+
+        function hideMessages() {
+          successEl.classList.add('hidden');
+          errorEl.classList.add('hidden');
+          errorEl.textContent = '';
+        }
+
+        function isValidEmail(value) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
+        }
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          hideMessages();
+
+          const name = nameInput.value.trim();
+          const email = emailInput.value.trim();
+          const content = contentInput.value.trim();
+
+          if (!name || !email || !content) {
+            errorEl.textContent = '請填寫所有欄位。';
+            errorEl.classList.remove('hidden');
+            return;
+          }
+
+          if (!isValidEmail(email)) {
+            errorEl.textContent = '請輸入有效的 Email 格式。';
+            errorEl.classList.remove('hidden');
+            return;
+          }
+
+          try {
+            const res = await fetch(`${API_BASE}/api/messages`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, email, content }),
+            });
+            const result = await res.json();
+            if (result.success) {
+              successEl.classList.remove('hidden');
+              form.reset();
+            } else {
+              errorEl.textContent = result.message || '送出失敗，請稍後再試。';
+              errorEl.classList.remove('hidden');
+            }
+          } catch (err) {
+            errorEl.textContent = '伺服器連線失敗，請稍後再試。';
+            errorEl.classList.remove('hidden');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

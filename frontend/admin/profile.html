@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人資料 — 管理後台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white">
+    <aside class="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col bg-slate-800 shadow-lg" aria-label="後台導覽">
+        <header class="border-b border-white/10 px-6 py-5">
+            <p class="text-lg font-semibold tracking-wide text-cyan-400">管理後台</p>
+        </header>
+        <nav class="flex flex-1 flex-col py-4" aria-label="主選單">
+            <a href="dashboard.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">儀表板</a>
+            <a href="projects.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">作品管理</a>
+            <a href="messages.html" class="block border-l-2 border-transparent px-6 py-3 text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white">留言管理</a>
+            <a href="profile.html" class="block border-l-2 border-cyan-400 bg-white/5 px-6 py-3 text-cyan-400 transition-colors duration-200" aria-current="page">個人資料</a>
+        </nav>
+        <div class="mt-auto border-t border-white/10 p-4">
+            <button type="button" onclick="logout()" class="block w-full rounded-lg px-6 py-3 text-left text-slate-400 transition-colors duration-200 hover:text-red-400">登出</button>
+        </div>
+    </aside>
+
+    <main class="ml-64 min-h-screen bg-slate-900 p-8">
+        <header>
+            <h1 class="text-2xl font-bold text-white">個人資料管理</h1>
+        </header>
+
+        <section class="mt-8" aria-label="個人資料表單">
+            <article class="max-w-2xl rounded-xl border border-white/10 bg-slate-800 p-8">
+                <form id="profile-form" class="space-y-6" onsubmit="event.preventDefault(); saveProfile();">
+                    <div>
+                        <label for="field-name" class="mb-2 block text-sm text-slate-300">名字</label>
+                        <input type="text" id="field-name" name="name" autocomplete="name" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="field-title" class="mb-2 block text-sm text-slate-300">職稱</label>
+                        <input type="text" id="field-title" name="title" autocomplete="organization-title" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="field-bio" class="mb-2 block text-sm text-slate-300">自我介紹</label>
+                        <textarea id="field-bio" name="bio" rows="5" class="w-full resize-y rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label for="field-avatar_url" class="mb-2 block text-sm text-slate-300">頭像網址</label>
+                        <input type="text" id="field-avatar_url" name="avatar_url" autocomplete="url" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="field-email" class="mb-2 block text-sm text-slate-300">Email</label>
+                        <input type="email" id="field-email" name="email" autocomplete="email" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="field-github" class="mb-2 block text-sm text-slate-300">GitHub</label>
+                        <input type="text" id="field-github" name="github" autocomplete="url" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="field-linkedin" class="mb-2 block text-sm text-slate-300">LinkedIn</label>
+                        <input type="text" id="field-linkedin" name="linkedin" autocomplete="url" class="w-full rounded-lg border border-white/10 bg-slate-700 px-4 py-3 text-white transition-colors focus:border-cyan-400 focus:outline-none">
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="rounded-lg bg-cyan-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-cyan-600">儲存</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        checkAuth();
+
+        async function loadProfile() {
+            try {
+                const data = await authFetch(`${API_BASE}/api/profile`);
+                if (data && data.success && data.data) {
+                    const p = data.data;
+                    document.getElementById('field-name').value = p.name || '';
+                    document.getElementById('field-title').value = p.title || '';
+                    document.getElementById('field-bio').value = p.bio || '';
+                    document.getElementById('field-avatar_url').value = p.avatar_url || '';
+                    document.getElementById('field-email').value = p.email || '';
+                    document.getElementById('field-github').value = p.github || '';
+                    document.getElementById('field-linkedin').value = p.linkedin || '';
+                }
+            } catch (err) {
+                console.error('載入個人資料失敗', err);
+            }
+        }
+
+        async function saveProfile() {
+            const body = {
+                name: document.getElementById('field-name').value,
+                title: document.getElementById('field-title').value,
+                bio: document.getElementById('field-bio').value,
+                avatar_url: document.getElementById('field-avatar_url').value,
+                email: document.getElementById('field-email').value,
+                github: document.getElementById('field-github').value,
+                linkedin: document.getElementById('field-linkedin').value,
+            };
+
+            try {
+                const data = await authFetch(`${API_BASE}/api/profile`, {
+                    method: 'PUT',
+                    body: JSON.stringify(body)
+                });
+                if (data && data.success) {
+                    showToast('個人資料已更新');
+                } else {
+                    showToast(data?.message || '更新失敗', 'error');
+                }
+            } catch (err) {
+                showToast('更新失敗', 'error');
+            }
+        }
+
+        loadProfile();
+    </script>
+</body>
+</html>
